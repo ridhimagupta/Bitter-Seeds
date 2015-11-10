@@ -18,10 +18,10 @@ public class Timer : MonoBehaviour {
 		if(!paused)
 		{
 			string t = GetComponent<Text>().text;
-			t = ""+ Mathf.Floor(Time.time*1.5f);
+			t = ""+ Mathf.Floor(Time.time);
 			
 			GetComponent<Text>().text = t;	
-			if(t=="5000")
+			if(t=="10")
 			{
 				GameObject report = (GameObject)Instantiate(Resources.Load("Report"));
 				report.transform.parent = gameObject.transform.parent.parent;
