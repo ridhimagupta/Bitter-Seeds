@@ -27,6 +27,19 @@ public class MyEventListener : MonoBehaviour, IPointerClickHandler
 		if (onClick)
 		{
 			blocks = GameObject.FindGameObjectsWithTag("Block");
+			for(int i=0;i<blocks.Length;i++)
+			{
+				for(int j=i;j<blocks.Length;j++)
+				{
+					if(int.Parse(blocks[i].name)>int.Parse(blocks[j].name))
+					{
+						GameObject temp = blocks[i];
+						blocks[i]=blocks[j];
+						blocks[j]=temp;	
+					}
+				}
+				
+			}
 			foreach(GameObject block in blocks)
 			{
 				if(block.GetComponent<BlockProperties>().isPlanted==false)
@@ -38,7 +51,7 @@ public class MyEventListener : MonoBehaviour, IPointerClickHandler
 					crop.transform.position = new Vector3(block.transform.position.x,block.transform.position.y,block.transform.position.z);
 					
 					int score = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
-					score -= 1000;
+					score -= 500;
 					GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text = "" + score;
 					break;
 					
