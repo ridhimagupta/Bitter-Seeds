@@ -21,7 +21,7 @@ public class Timer : MonoBehaviour {
 			t = ""+ Mathf.Floor(Time.time);
 			
 			GetComponent<Text>().text = t;	
-			if(t=="10")
+			if(t=="200")
 			{
 				GameObject report = (GameObject)Instantiate(Resources.Load("Report"));
 				report.transform.parent = gameObject.transform.parent.parent;

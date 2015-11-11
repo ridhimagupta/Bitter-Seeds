@@ -51,12 +51,9 @@ public class MyEventListener : MonoBehaviour, IPointerClickHandler
 					crop.transform.position = new Vector3(block.transform.position.x,block.transform.position.y,block.transform.position.z);
 					
 					int score = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
-					
-					score -= 500;
+				
 					GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text = "" + score;
 						break;
-					
-					
 					
 				}
 			}
