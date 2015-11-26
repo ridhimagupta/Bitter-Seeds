@@ -5,6 +5,7 @@ public class BlockProperties : MonoBehaviour {
 
 	// Use this for initialization
 	public bool isPlanted = false;
+	public string crop;
 	void Start () {
 	
 	}

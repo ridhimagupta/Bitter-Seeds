@@ -48,8 +48,13 @@
   <ItemGroup>
      <Compile Include="Assets\ats Package\Demoscene\Terrain\UnityTerrainBump\CustomTerrainScript.cs" />
      <Compile Include="Assets\scripts\BlockProperties.cs" />
+     <Compile Include="Assets\scripts\BlocksController.cs" />
      <Compile Include="Assets\scripts\CropGrow.cs" />
+     <Compile Include="Assets\scripts\DoneScript.cs" />
+     <Compile Include="Assets\scripts\Harvest.cs" />
+     <Compile Include="Assets\scripts\Irrigation.cs" />
      <Compile Include="Assets\scripts\MyEventListener.cs" />
+     <Compile Include="Assets\scripts\ParticleTest.cs" />
      <Compile Include="Assets\scripts\PlayerScript.cs" />
      <Compile Include="Assets\scripts\Timer.cs" />
      <None Include="Assets\ats Package\Demoscene\Terrain\UnityTerrainBump\TerrainReplacement.shader" />
