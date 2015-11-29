@@ -77,8 +77,28 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 		
 		if(report.name=="LowPricesReport" && irrigation)
 		{
-			WheatPrice = 200;
+			WheatPrice = 600;
+			BTCottonPrice = 850; 
+			CottonPrice = 850;
+			RicePrice = 750;
 		}
+		
+		if(report.name=="InfestationReport")
+		{
+			WheatPrice = 600;
+			BTCottonPrice = 850; 
+			CottonPrice = 850;
+			RicePrice = 250;
+		}
+		
+		if(report.name=="DroughtReport")
+		{
+			WheatPrice = 600;
+			BTCottonPrice = 0; 
+			CottonPrice = 0;
+			RicePrice = 100;
+		}
+		
 		foreach(Transform child in report.transform)
 		{
 
@@ -91,8 +111,6 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 			else if(child.name=="RiceNumber")
 				child.GetComponent<Text>().text = "" + Rice + " X " + RicePrice + " = Rs. " + Rice*RicePrice;
 			
-				
-		
 		}
 		
 		paused = true;	
