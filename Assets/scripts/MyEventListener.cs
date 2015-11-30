@@ -17,23 +17,12 @@ public class MyEventListener : MonoBehaviour, IPointerClickHandler
 		harvest = GameObject.Find ("Harvest").GetComponent<Harvest>();
 		
 		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
-		
-		if(gameObject.name == "Cotton")
-		{
-			price = harvest.CottonPrice;
-		}
-		else if(gameObject.name == "Wheat")
-		{
-			price = harvest.WheatPrice;
-		}
-		else if(gameObject.name == "BTCotton")
-		{
-			price = harvest.BTCottonPrice;
-		}
+
 		
 	}
 	public void OnPointerClick(PointerEventData data)
-	{      
+	{
+		//Debug.Log (savings);		      
 		if(onClick)
 		{
 			foreach(GameObject block in bc.blocks)
@@ -57,7 +46,9 @@ public class MyEventListener : MonoBehaviour, IPointerClickHandler
 					GameObject crop = (GameObject)Instantiate(Resources.Load(gameObject.name));
 					crop.transform.position = new Vector3(block.transform.position.x,block.transform.position.y,block.transform.position.z);
 					crop.transform.parent = block.transform;
+					savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
 					savings -= price;
+					
 					GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text = "" + savings;
 						break;
 					
@@ -70,15 +61,38 @@ public class MyEventListener : MonoBehaviour, IPointerClickHandler
 	}
 	void Update ()
 	{
-		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
+		
 		if(bc.blocks[bc.blocks.Length-1].GetComponent<BlockProperties>().isPlanted==true || savings<price)
 		{
+		
 			
 			GetComponent<Button>().interactable=false;
 			onClick = false;
 			
-			
 		}
+//		else if(GameObject.Find("Harvest").GetComponent<Harvest>().harvest = true)
+//		{
+//			onClick = false;
+//		}
+//		else
+//			onClick = true;
+		if(gameObject.name == "Wheat")
+		{
+			price = harvest.WheatPrice;
+		}
+		else if(gameObject.name == "Cotton")
+		{
+			price = harvest.CottonPrice;
+		}
+		else if(gameObject.name == "BTCotton")
+		{
+			price = harvest.BTCottonPrice;
+		}
+		else if(gameObject.name == "Rice")
+		{
+			price = harvest.RicePrice;
+		}
+
 		
 	}
 }

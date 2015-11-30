@@ -14,19 +14,24 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 	GameObject[] children;
 	public int Wheat, BTcotton, Cotton, Rice;
 	public int WheatPrice, BTCottonPrice, CottonPrice, RicePrice;
-	public bool irrigation, fertilizer, pesticide;
+	public bool irrigation, fertilizer, pesticide, harvest;
 	BlocksController bc;
+	int houseExpenditures;
+	int savings;
+	int totalSavings;
 	
 	void Start () 
 	{
 		
 		bc = GameObject.Find ("Blocks").GetComponent<BlocksController>();
 		paused = false;
-
+		
 		Init ();
+		
 	}
 	public void Init()
 	{
+		harvest = false;
 		Wheat = 0;
 		BTcotton = 0;
 		Cotton = 0;
@@ -35,9 +40,12 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 		BTCottonPrice = 500;
 		CottonPrice = 500;
 		RicePrice = 500;
+		houseExpenditures = 1500;
 		irrigation = false;
 		fertilizer = false;
 		pesticide = false;
+		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
+		Debug.Log (savings);
 		foreach(GameObject block in bc.blocks)
 		{
 			block.GetComponent<BlockProperties>().isPlanted=false;
@@ -50,32 +58,43 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 		int i = 0;
 		foreach(Transform child in reports.transform)
 		{
-			
-			
-			if(child.name=="LowPricesReport")
-			{
-				
-			}
+//			
+//			
+//			if(child.name=="LowPricesReport")
+//			{
+//				
+//			}
 			children[i] = child.gameObject;
 			i++;
 		}
+		
 	}
 	// Update is called once per frame
 	void Update () 
 	{
-
+		//Debug.Log(savings);
+		if(savings<houseExpenditures)
+		{
+			Debug.Log ("You do not have enough savings. Game over");
+			//GameObject GameOver = (GameObject)Instantiate(Resources.Load("GameOver"));
+			
+			//crop.transform.position = new Vector3(block.transform.position.x,block.transform.position.y,block.transform.position.z);
+			//crop.transform.parent = block.transform;
+		}
 		
 	}
 	public void OnPointerClick(PointerEventData data)
 	{
-		Debug.Log ("Harvest");
+		harvest = true;
+		//Debug.Log ("Harvest");
 		int r = Random.Range(0,children.Length);
 		GameObject report = children[r];
 		
 		report.transform.SetParent(gameObject.transform.parent.parent.parent);//;
 		report.transform.position = gameObject.transform.parent.parent.parent.position;
 		
-		if(report.name=="LowPricesReport" && irrigation)
+		
+		if(report.name=="LowPricesReport")
 		{
 			WheatPrice = 600;
 			BTCottonPrice = 850; 
@@ -83,22 +102,28 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 			RicePrice = 750;
 		}
 		
-		if(report.name=="InfestationReport")
+		else if(report.name=="InfestationReport")
 		{
-			WheatPrice = 600;
-			BTCottonPrice = 850; 
-			CottonPrice = 850;
+			WheatPrice = 200;
+			BTCottonPrice = 250; 
+			CottonPrice = 0;
 			RicePrice = 250;
 		}
 		
-		if(report.name=="DroughtReport")
+		else if(report.name=="DroughtReport")
 		{
-			WheatPrice = 600;
-			BTCottonPrice = 0; 
-			CottonPrice = 0;
+			WheatPrice = 300;
+			BTCottonPrice = 200; 
+			CottonPrice = 200;
 			RicePrice = 100;
 		}
-		
+		int sum=Wheat*WheatPrice + BTcotton*BTCottonPrice + Cotton*CottonPrice + Rice*RicePrice;
+		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
+		savings = savings + sum - houseExpenditures;
+		totalSavings = sum - houseExpenditures;
+		report.transform.FindChild("Amount").gameObject.GetComponent<Text>().text = "" + sum;
+		report.transform.FindChild("TotalSavings").gameObject.GetComponent<Text>().text = "" + totalSavings;
+		GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text = "" + savings;
 		foreach(Transform child in report.transform)
 		{
 
@@ -112,7 +137,7 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 				child.GetComponent<Text>().text = "" + Rice + " X " + RicePrice + " = Rs. " + Rice*RicePrice;
 			
 		}
-		
+		//GameObject.Find("Wheat");
 		paused = true;	
 		//Init ();
 	}

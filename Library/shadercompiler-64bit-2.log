@@ -1,3 +1,27 @@
 Base path: /Applications/Unity/Unity.app/Contents
 Pipe name: \\.\pipe\UnityShaderCompiler-64bit-2-163246080
 Cmd: getPlatforms
+Cmd: compileSnippet
+  api=1 type=0 insize=1482 outsize=169 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=8 type=0 insize=1482 outsize=1828 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=8 type=0 insize=1482 outsize=2982 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=1 type=1 insize=1482 outsize=147 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=8 type=1 insize=1482 outsize=1349 kw=SOFTPARTICLES_OFF ok=1
+Cmd: compileSnippet
+  api=8 type=1 insize=1482 outsize=2454 kw=SOFTPARTICLES_ON ok=1
+Cmd: compileSnippet
+  api=1 type=0 insize=9591 outsize=4194 kw= ok=1
+Cmd: compileSnippet
+  api=1 type=0 insize=9591 outsize=3889 kw=UNITY_COLORSPACE_GAMMA ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=9591 outsize=10358 kw=UNITY_COLORSPACE_GAMMA ok=1
+Cmd: compileSnippet
+  api=1 type=1 insize=9591 outsize=837 kw= ok=1
+Cmd: compileSnippet
+  api=1 type=1 insize=9591 outsize=967 kw=UNITY_COLORSPACE_GAMMA ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=9591 outsize=2639 kw=UNITY_COLORSPACE_GAMMA ok=1
