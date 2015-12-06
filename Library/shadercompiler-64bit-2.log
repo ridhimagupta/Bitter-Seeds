@@ -25,3 +25,6 @@ Cmd: compileSnippet
   api=1 type=1 insize=9591 outsize=967 kw=UNITY_COLORSPACE_GAMMA ok=1
 Cmd: compileSnippet
   api=4 type=1 insize=9591 outsize=2639 kw=UNITY_COLORSPACE_GAMMA ok=1
+End of pipe
+
+Quitting shader compiler process
