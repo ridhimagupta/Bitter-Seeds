@@ -14,6 +14,7 @@ public class IPF : MonoBehaviour, IPointerClickHandler
 	//public bool done = false;
 	bool guiOn;
 	Rect rect;
+	int flag=-1;
 	void Start () 
 	{
 		harvest = GameObject.Find ("Harvest").GetComponent<Harvest>();
@@ -26,49 +27,62 @@ public class IPF : MonoBehaviour, IPointerClickHandler
 		windowRect = new Rect((Screen.width-width)/2,(Screen.height-height)/2,width,height);
 		Debug.Log(Screen.height);
 		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
+		GetComponent<Button>().interactable = true;
+		clicked = true;
+		flag=-1;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
-		if(!harvest.irrigation && gameObject.name == "Irrigation" && savings>=Icost)
+		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
+		if(!harvest.irrigation && gameObject.name == "Irrigation")
 		{
-			GetComponent<Button>().interactable = true;
-
-			clicked = true;
-		}
-		else
-		{
-			GetComponent<Button>().interactable = false;
-			clicked = false;
+			if(savings>=Icost)
+			{
+				GetComponent<Button>().interactable = true;
+				clicked = true;
+			}
+			else
+			{
+				GetComponent<Button>().interactable = false;
+				clicked = false;
+			}
+			
 		}
 			
-		if(!harvest.pesticide && gameObject.name == "Pesticide" && savings>=Pcost)
+		if(!harvest.pesticide && gameObject.name == "Pesticide" )
 		{
-			GetComponent<Button>().interactable = true;
-			clicked = true;
+			if(savings>=Pcost)
+			{
+				GetComponent<Button>().interactable = true;
+				clicked = true;
+			}
+			else
+			{
+				GetComponent<Button>().interactable = false;
+				clicked = false;
+			}
 		}
-		else
+		if(!harvest.fertilizer && gameObject.name == "Fertilizer" )
 		{
-			GetComponent<Button>().interactable = false;
-			clicked = false;
+			if(savings>=Fcost)
+			{
+				GetComponent<Button>().interactable = true;
+				clicked = true;
+			}
+			else
+			{
+				GetComponent<Button>().interactable = false;
+				clicked = false;
+			}
 		}
-		if(!harvest.fertilizer && gameObject.name == "Fertilizer" && savings>=Fcost)
-		{
-			GetComponent<Button>().interactable = true;
-			clicked = true;
-		}
-		else
-		{
-			GetComponent<Button>().interactable = false;
-			clicked = false;
-		}
+
 	
 	}
 	public void OnPointerClick(PointerEventData data)
 	{
-		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
-		
 		
 		if(clicked)
 		{
@@ -78,9 +92,8 @@ public class IPF : MonoBehaviour, IPointerClickHandler
 				guiOn = true;
 				harvest.irrigation = true;
 				GetComponent<Button>().interactable = false;
-				
 				savings = savings - Icost;
-				
+				flag=1;
 				
 			}
 			if(gameObject.name == "Pesticide" && savings>=Pcost && !harvest.pesticide)
@@ -90,6 +103,7 @@ public class IPF : MonoBehaviour, IPointerClickHandler
 				GetComponent<Button>().interactable = false;
 				
 				savings = savings - Pcost;
+				flag=1;
 			}
 			if(gameObject.name == "Fertilizer" && savings>=Fcost && !harvest.fertilizer)
 			{
@@ -98,25 +112,29 @@ public class IPF : MonoBehaviour, IPointerClickHandler
 				GetComponent<Button>().interactable = false;
 			
 				savings = savings - Fcost;
+				flag=1;
 			}
 			clicked = false;
 			GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text = "" + savings;
-			guiOn = false;
+			
 		}
 	}
 	
 	void OnGUI()
 	{ 
-		if (guiOn)
+		if (guiOn && flag==1)
 		{ 
-			GUI.Window(0, windowRect, DoMyWindow, gameObject.name + " done");
 			
+			GUI.Window(0, windowRect, DoMyWindow, gameObject.name + " done");
+				
 		} 
 	}
 	void DoMyWindow(int windowID) {
-		if (GUI.Button(new Rect(windowRect.x-windowRect.width/2, 20, 100, 20), "OK"))
+		if (GUI.Button(new Rect((windowRect.xMax-windowRect.xMin-100)/2, 20, 100, 20), "OK"))
 		{
+			Debug.Log ("MyWindow");
 			guiOn = false;
+			flag=-1;
 			
 		}
 		

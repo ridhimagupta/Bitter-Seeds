@@ -12,28 +12,29 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 	GameObject reports;
 	Transform[] transforms;
 	GameObject[] children;
+	public int counter;
 	public int Wheat, BTcotton, Cotton, Rice;
 	public int WheatPrice, BTCottonPrice, CottonPrice, RicePrice;
 	public bool irrigation, fertilizer, pesticide, harvest;
 	BlocksController bc;
-	int[] livingExpenditures;
-	int fixedExpenditures;
+	public int[] livingExpenditures;
+	public int fixedExpenditures;
 	int savings;
 	int totalSavings;
 	string[] livingExpenseText;
 	void Start () 
 	{
-		
+		counter = 1;
 		bc = GameObject.Find ("Blocks").GetComponent<BlocksController>();
 		paused = false;
+		fixedExpenditures=1000;
 		Init ();
 		livingExpenseText = new string[]{
-		
 		"Living expenses stayed close to the average expenses this year.",
 		"There was a high inflation rate this year, and living expenses increased by Rs. 1200.",
 		"Due to ill health of a family member, you had to pay Rs. 2000 for treatment.",
 		"Due to ill health of a family member, you had to pay Rs. 3000 for treatment."};
-		livingExpenditures = new int[]{fixedExpenditures, fixedExpenditures+1200, fixedExpenditures + 2000, fixedExpenditures + 3000};
+		
 		
 		
 		
@@ -45,11 +46,11 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 		BTcotton = 0;
 		Cotton = 0;
 		Rice = 0;
-		WheatPrice = 500;
-		BTCottonPrice = 500;
+		WheatPrice = 400;
+		BTCottonPrice = 800;
 		CottonPrice = 500;
-		RicePrice = 500;
-		fixedExpenditures=1000;
+		RicePrice = 700;
+		livingExpenditures = new int[]{fixedExpenditures, fixedExpenditures+1200, fixedExpenditures + 2000, fixedExpenditures + 3000};
 		//livingExpenditures = 1500;
 		irrigation = false;
 		fertilizer = false;
@@ -73,27 +74,19 @@ public class Harvest : MonoBehaviour, IPointerClickHandler
 			children[i] = child.gameObject;
 			i++;
 		}
+
 		
 	}
 	// Update is called once per frame
 	void Update () 
 	{
-		//Debug.Log(savings);
-//		if(savings<0)
-//		{
-//			
-//			Application.LoadLevel(1);
-//			//GameObject GameOver = (GameObject)Instantiate(Resources.Load("GameOver"));
-//			
-//			//crop.transform.position = new Vector3(block.transform.position.x,block.transform.position.y,block.transform.position.z);
-//			//crop.transform.parent = block.transform;
-//		}
+		savings = int.Parse(GameObject.FindGameObjectWithTag("Savings").GetComponent<Text>().text);
 		
 	}
 	public void OnPointerClick(PointerEventData data)
 	{
 		harvest = true;
-		//Debug.Log ("Harvest");
+		counter++;
 		int r = Random.Range(0,children.Length);
 		GameObject report = children[r];
 		

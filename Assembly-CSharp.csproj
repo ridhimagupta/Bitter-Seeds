@@ -55,9 +55,11 @@
      <Compile Include="Assets\scripts\IPF.cs" />
      <Compile Include="Assets\scripts\MyEventListener.cs" />
      <Compile Include="Assets\scripts\NextScene.cs" />
+     <Compile Include="Assets\scripts\OpButton.cs" />
      <Compile Include="Assets\scripts\Opportunity.cs" />
      <Compile Include="Assets\scripts\ParticleTest.cs" />
      <Compile Include="Assets\scripts\PlayerScript.cs" />
+     <Compile Include="Assets\scripts\Replay.cs" />
      <Compile Include="Assets\scripts\Timer.cs" />
      <None Include="Assets\ats Package\Demoscene\Terrain\UnityTerrainBump\TerrainReplacement.shader" />
      <None Include="Assets\Standard Assets\water well\readme.txt" />
