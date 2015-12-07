@@ -20,6 +20,7 @@ public class DoneScript : MonoBehaviour, IPointerClickHandler
 	}
 	public void OnPointerClick(PointerEventData data)
 	{
+		
 		harvest.Init();
 		//gameObject.transform.parent.gameObject.SetActive(false);
 		Destroy(gameObject.transform.parent.gameObject);
